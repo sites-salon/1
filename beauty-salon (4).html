@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Салон красоты Magnolia — профессиональный уход, маникюр, педикюр, парикмахерские услуги, брови и ресницы, косметология. Доступные цены.">
+<title>Magnolia — Салон красоты</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF7F2;
+    --milk: #FDF9F5;
+    --blush: #F4E4DC;
+    --rose: #E8C4B4;
+    --dusty: #D4A090;
+    --mauve: #B8856A;
+    --gold: #C9A96E;
+    --gold-light: #E8D5B0;
+    --dark: #2C2018;
+    --mid: #6B4F3A;
+    --text: #3D2B1F;
+    --muted: #8C6E5D;
+    --white: #FFFFFF;
+    --border: rgba(180,130,100,0.18);
+    --border-gold: rgba(201,169,110,0.35);
+    --shadow: 0 4px 32px rgba(100,60,30,0.08);
+    --shadow-card: 0 2px 20px rgba(100,60,30,0.1);
+    --nav-h: 72px;
+    --r: 16px;
+    --r-sm: 10px;
+    --transition: 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; background: var(--milk); color: var(--text); overflow-x: hidden; }
+  img { max-width: 100%; display: block; }
+  a { text-decoration: none; color: inherit; }
+  button { cursor: pointer; font-family: inherit; }
+
+  /* TYPOGRAPHY */
+  .display { font-family: 'Cormorant Garamond', serif; }
+  h1,h2,h3 { font-family: 'Cormorant Garamond', serif; }
+  h1 { font-size: clamp(2.6rem, 7vw, 5.2rem); font-weight: 300; line-height: 1.08; letter-spacing: -0.02em; }
+  h2 { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 300; line-height: 1.15; }
+  h3 { font-size: 1.4rem; font-weight: 400; }
+  .eyebrow { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+
+  /* LAYOUT */
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 clamp(20px,5vw,60px); }
+  section { padding: clamp(60px,10vw,120px) 0; }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 32px; border-radius: 50px; font-size: 0.88rem; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase; transition: var(--transition);
+    border: none; white-space: nowrap;
+  }
+  .btn-primary {
+    background: var(--gold); color: var(--white);
+    box-shadow: 0 4px 20px rgba(201,169,110,0.35);
+  }
+  .btn-primary:hover { background: var(--mauve); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(201,169,110,0.4); }
+  .btn-outline {
+    background: transparent; color: var(--white);
+    border: 1.5px solid rgba(255,255,255,0.6);
+  }
+  .btn-outline:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.9); }
+  .btn-dark {
+    background: var(--dark); color: var(--white);
+  }
+  .btn-dark:hover { background: var(--mid); transform: translateY(-2px); }
+  .btn-ghost {
+    background: transparent; color: var(--gold);
+    border: 1.5px solid var(--border-gold); padding: 11px 28px;
+  }
+  .btn-ghost:hover { background: var(--gold); color: var(--white); }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    height: var(--nav-h); display: flex; align-items: center;
+    transition: var(--transition);
+  }
+  nav.scrolled {
+    background: rgba(253,249,245,0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 2px 20px rgba(100,60,30,0.06);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+  .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 400; color: var(--white); letter-spacing: 0.1em; transition: color var(--transition); }
+  nav.scrolled .logo { color: var(--dark); }
+  .logo span { color: var(--gold); }
+  .nav-links { display: none; align-items: center; gap: 8px; }
+  .nav-links a {
+    font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(255,255,255,0.85); padding: 8px 14px; border-radius: 50px;
+    transition: var(--transition);
+  }
+  nav.scrolled .nav-links a { color: var(--muted); }
+  .nav-links a:hover { background: rgba(255,255,255,0.15); color: var(--white); }
+  nav.scrolled .nav-links a:hover { background: var(--blush); color: var(--dark); }
+  .nav-book {
+    display: none;
+    font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+    background: var(--gold); color: var(--white); padding: 9px 22px;
+    border-radius: 50px; transition: var(--transition);
+  }
+  .nav-book:hover { background: var(--mauve); transform: translateY(-1px); }
+  .burger { display: flex; flex-direction: column; gap: 5px; background: none; border: none; padding: 6px; cursor: pointer; position: relative; z-index: 1001; }
+  .burger span { display: block; width: 24px; height: 1.5px; background: var(--white); transition: var(--transition); border-radius: 2px; }
+  nav.scrolled .burger span { background: var(--dark); }
+  .burger.open span { background: var(--dark); }
+  .burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  /* MOBILE MENU */
+  .mobile-menu {
+    position: fixed; inset: 0; z-index: 998;
+    background: var(--milk); display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 4px;
+    transform: translateY(-100%); transition: transform 0.5s cubic-bezier(0.77,0,0.175,1);
+    pointer-events: none; padding: 80px 20px 40px;
+  }
+  .mobile-menu.open { transform: translateY(0); pointer-events: all; }
+  .mobile-menu a {
+    font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300;
+    color: var(--text); transition: color var(--transition);
+    padding: 10px 20px; text-align: center; display: block; width: 100%;
+  }
+  .mobile-menu a:hover, .mobile-menu a:active { color: var(--gold); }
+  .mobile-menu .btn-primary { font-family: 'Jost', sans-serif; font-size: 0.88rem; margin-top: 20px; width: auto; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; position: relative; display: flex; align-items: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background: linear-gradient(135deg, #2C1810 0%, #5C3020 40%, #8B5040 100%);
+  }
+  .hero-photo {
+    position: absolute; inset: 0; z-index: 1;
+    background: url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1400&q=80') center/cover no-repeat;
+    opacity: 0.45;
+  }
+  .hero-overlay {
+    position: absolute; inset: 0; z-index: 2;
+    background: linear-gradient(to right, rgba(30,15,8,0.75) 0%, rgba(30,15,8,0.2) 60%, transparent 100%);
+  }
+  .hero-content {
+    position: relative; z-index: 3;
+    max-width: 680px; padding-top: var(--nav-h);
+  }
+  .hero-content .eyebrow { color: var(--gold-light); margin-bottom: 24px; }
+  .hero-content h1 { color: var(--white); margin-bottom: 20px; text-shadow: 0 2px 20px rgba(0,0,0,0.2); }
+  .hero-sub { font-size: 1.05rem; color: rgba(255,255,255,0.75); line-height: 1.7; margin-bottom: 40px; max-width: 480px; font-weight: 300; }
+  .hero-btns { display: flex; flex-wrap: wrap; gap: 14px; }
+  .hero-scroll {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 3;
+    display: flex; flex-direction: column; align-items: center; gap: 8px; color: rgba(255,255,255,0.5);
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    animation: bounce 2s ease-in-out infinite;
+  }
+  .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent); }
+  @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+
+  /* SECTION HEADER */
+  .section-header { text-align: center; margin-bottom: clamp(40px,7vw,70px); }
+  .section-header h2 { margin: 12px 0 16px; }
+  .section-header p { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 540px; margin: 0 auto; }
+  .gold-line { width: 50px; height: 1px; background: var(--gold); margin: 16px auto 0; }
+
+  /* ABOUT */
+  .about { background: var(--cream); }
+  .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,6vw,80px); align-items: center; }
+  .about-img-wrap { position: relative; }
+  .about-img {
+    width: 100%; aspect-ratio: 3/4; object-fit: cover;
+    border-radius: var(--r); background: url('https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=700&q=80') center/cover no-repeat;
+  }
+  .about-badge {
+    position: absolute; bottom: -20px; right: -20px;
+    background: var(--gold); color: var(--white);
+    border-radius: 50%; width: 110px; height: 110px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; text-align: center; line-height: 1.3;
+    box-shadow: var(--shadow);
+  }
+  .about-badge strong { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 400; display: block; }
+  .about-text .eyebrow { margin-bottom: 16px; }
+  .about-text h2 { margin-bottom: 20px; color: var(--dark); }
+  .about-text p { color: var(--muted); line-height: 1.8; margin-bottom: 32px; font-weight: 300; }
+  .perks { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .perk {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--milk); border-radius: var(--r-sm);
+    padding: 16px; border: 1px solid var(--border);
+  }
+  .perk-icon { width: 36px; height: 36px; min-width: 36px; border-radius: 50%; background: var(--blush); display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+  .perk-label { font-size: 0.85rem; font-weight: 500; color: var(--text); line-height: 1.4; }
+
+  /* SERVICES */
+  .services { background: var(--milk); }
+  .services-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 48px; }
+  .tab-btn {
+    padding: 10px 22px; border-radius: 50px; border: 1.5px solid var(--border-gold);
+    background: transparent; color: var(--muted); font-size: 0.82rem; letter-spacing: 0.06em;
+    font-family: 'Jost', sans-serif; cursor: pointer; transition: var(--transition);
+  }
+  .tab-btn.active { background: var(--gold); color: var(--white); border-color: var(--gold); }
+  .tab-btn:hover:not(.active) { border-color: var(--gold); color: var(--gold); }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 28px; }
+  .service-card {
+    background: var(--white); border-radius: var(--r); overflow: hidden;
+    border: 1px solid var(--border); transition: var(--transition); cursor: pointer;
+    box-shadow: var(--shadow-card);
+  }
+  .service-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(100,60,30,0.14); border-color: var(--border-gold); }
+  .card-img { width: 100%; height: 200px; object-fit: cover; background: var(--blush); position: relative; overflow: hidden; }
+  .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
+  .service-card:hover .card-img img { transform: scale(1.06); }
+  .card-body { padding: 22px 24px 24px; }
+  .card-category { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 500; margin-bottom: 8px; color: var(--dark); }
+  .card-desc { font-size: 0.87rem; color: var(--muted); line-height: 1.65; margin-bottom: 18px; }
+  .card-footer { display: flex; align-items: center; justify-content: space-between; }
+  .card-price { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 500; color: var(--dark); }
+  .card-price small { font-family: 'Jost', sans-serif; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.05em; }
+  .card-btn {
+    padding: 9px 18px; border-radius: 50px; border: none;
+    background: var(--blush); color: var(--mauve); font-size: 0.78rem;
+    font-family: 'Jost', sans-serif; font-weight: 500; cursor: pointer;
+    transition: var(--transition); letter-spacing: 0.06em;
+  }
+  .card-btn:hover { background: var(--gold); color: var(--white); }
+
+  /* PRICE */
+  .price-section { background: var(--cream); }
+  .price-table { width: 100%; border-collapse: collapse; }
+  .price-table thead th {
+    text-align: left; padding: 14px 20px; background: var(--dark); color: var(--gold);
+    font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500;
+  }
+  .price-table thead th:last-child { text-align: right; }
+  .price-table thead th:first-child { border-radius: 10px 0 0 0; }
+  .price-table thead th:last-child { border-radius: 0 10px 0 0; }
+  .price-table tbody tr { border-bottom: 1px solid var(--border); transition: background var(--transition); }
+  .price-table tbody tr:hover { background: var(--blush); }
+  .price-group td { padding: 12px 20px; background: rgba(201,169,110,0.08); font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600; color: var(--mauve); letter-spacing: 0.05em; }
+  .price-table td { padding: 13px 20px; font-size: 0.9rem; color: var(--text); }
+  .price-table td:last-child { text-align: right; font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--dark); font-weight: 500; }
+  .price-wrap { background: var(--white); border-radius: var(--r); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-card); }
+
+  /* GALLERY */
+  .gallery { background: var(--milk); }
+  .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .gallery-item {
+    position: relative; overflow: hidden; border-radius: var(--r-sm);
+    cursor: pointer; aspect-ratio: 1; min-height: 160px;
+  }
+  .gallery-item:nth-child(1) { grid-row: span 2; aspect-ratio: auto; min-height: 320px; }
+  .gallery-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; position: absolute; inset: 0; }
+  .gallery-item:hover .gallery-img { transform: scale(1.08); }
+  .gallery-overlay {
+    position: absolute; inset: 0; background: linear-gradient(to top, rgba(30,15,8,0.7), transparent);
+    opacity: 0; transition: opacity var(--transition); display: flex; align-items: flex-end; padding: 20px;
+  }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .gallery-label { color: var(--white); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* LIGHTBOX */
+  .lightbox {
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(20,10,5,0.95); display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity var(--transition);
+  }
+  .lightbox.open { opacity: 1; pointer-events: all; }
+  .lightbox img { max-width: 90vw; max-height: 85vh; border-radius: var(--r-sm); object-fit: contain; }
+  .lightbox-close {
+    position: absolute; top: 24px; right: 24px;
+    background: rgba(255,255,255,0.15); border: none; color: var(--white);
+    width: 44px; height: 44px; border-radius: 50%; font-size: 1.3rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; transition: var(--transition);
+  }
+  .lightbox-close:hover { background: rgba(255,255,255,0.3); }
+
+  /* TESTIMONIALS */
+  .testimonials { background: var(--cream); overflow: hidden; }
+  .reviews-track { display: flex; gap: 24px; transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94); }
+  .reviews-wrap { overflow: hidden; }
+  .review-card {
+    min-width: 340px; background: var(--white); border-radius: var(--r);
+    padding: 28px 28px 24px; border: 1px solid var(--border); box-shadow: var(--shadow-card);
+    flex-shrink: 0;
+  }
+  .review-stars { color: var(--gold); font-size: 1rem; margin-bottom: 16px; letter-spacing: 2px; }
+  .review-text { font-size: 0.93rem; color: var(--muted); line-height: 1.75; margin-bottom: 20px; font-weight: 300; font-style: italic; }
+  .reviewer { display: flex; align-items: center; gap: 12px; }
+  .reviewer-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--blush); overflow: hidden; flex-shrink: 0; }
+  .reviewer-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .reviewer-name { font-size: 0.9rem; font-weight: 500; color: var(--dark); }
+  .reviewer-date { font-size: 0.75rem; color: var(--muted); }
+  .slider-controls { display: flex; justify-content: center; gap: 12px; margin-top: 36px; }
+  .slider-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--rose); transition: var(--transition); border: none; cursor: pointer; padding: 0; }
+  .slider-dot.active { background: var(--gold); transform: scale(1.3); }
+  .slider-nav { display: flex; gap: 10px; margin-top: 24px; justify-content: center; }
+  .slider-nav button {
+    width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--border-gold);
+    background: transparent; color: var(--gold); font-size: 1.1rem; cursor: pointer;
+    transition: var(--transition); display: flex; align-items: center; justify-content: center;
+  }
+  .slider-nav button:hover { background: var(--gold); color: var(--white); }
+
+  /* BOOKING */
+  .booking { background: var(--dark); }
+  .booking .section-header h2 { color: var(--white); }
+  .booking .section-header p { color: rgba(255,255,255,0.55); }
+  .booking .eyebrow { color: var(--gold-light); }
+  .booking .gold-line { background: var(--gold-light); }
+  .booking-form {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--r); padding: clamp(28px,5vw,52px);
+    max-width: 720px; margin: 0 auto;
+  }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-group label { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+  .form-group input, .form-group select, .form-group textarea {
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    border-radius: var(--r-sm); padding: 14px 16px; color: var(--white);
+    font-family: 'Jost', sans-serif; font-size: 0.95rem; transition: border-color var(--transition);
+    outline: none; appearance: none; -webkit-appearance: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--gold);
+  }
+  .form-group select { cursor: pointer; }
+  .form-group select option { background: var(--dark); color: var(--white); }
+  .form-group textarea { resize: vertical; min-height: 90px; }
+  .form-group.full { grid-column: 1/-1; }
+  .form-submit { text-align: center; margin-top: 24px; }
+  .success-msg {
+    background: rgba(201,169,110,0.15); border: 1px solid var(--gold);
+    border-radius: var(--r-sm); padding: 20px; text-align: center; color: var(--gold-light);
+    font-size: 0.95rem; display: none; margin-top: 16px;
+  }
+  ::placeholder { color: rgba(255,255,255,0.3); }
+
+  /* MASTERS */
+  .masters { background: var(--milk); }
+  .masters-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 28px; }
+  .master-card {
+    background: var(--white); border-radius: var(--r); overflow: hidden;
+    border: 1px solid var(--border); transition: var(--transition); text-align: center;
+    box-shadow: var(--shadow-card);
+  }
+  .master-card:hover { transform: translateY(-6px); box-shadow: 0 20px 52px rgba(100,60,30,0.12); }
+  .master-photo { width: 100%; aspect-ratio: 4/5; object-fit: cover; background: var(--blush); position: relative; overflow: hidden; }
+  .master-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; transition: transform 0.6s ease; }
+  .master-card:hover .master-photo img { transform: scale(1.04); }
+  .master-info { padding: 20px 20px 24px; }
+  .master-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; margin-bottom: 4px; color: var(--dark); }
+  .master-spec { font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .master-exp { font-size: 0.85rem; color: var(--muted); }
+
+  /* CONTACTS */
+  .contacts { background: var(--cream); }
+  .contacts-inner { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,6vw,80px); }
+  .contact-item { display: flex; flex-direction: column; gap: 6px; padding: 20px 0; border-bottom: 1px solid var(--border); }
+  .contact-label { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); }
+  .contact-value { font-size: 1rem; color: var(--dark); font-weight: 400; }
+  .contact-value a { color: var(--dark); transition: color var(--transition); }
+  .contact-value a:hover { color: var(--gold); }
+  .contacts-map {
+    background: var(--blush); border-radius: var(--r); overflow: hidden;
+    height: 360px; display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--border); position: relative;
+  }
+  .contacts-map iframe { width: 100%; height: 100%; border: none; }
+  .social-links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+  .social-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 20px; border-radius: 50px; border: 1.5px solid var(--border-gold);
+    color: var(--mauve); font-size: 0.82rem; font-weight: 500; transition: var(--transition);
+    letter-spacing: 0.05em;
+  }
+  .social-btn:hover { background: var(--gold); color: var(--white); border-color: var(--gold); }
+  .hours-list { list-style: none; }
+  .hours-list li { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; color: var(--muted); }
+  .hours-list li span:last-child { color: var(--dark); font-weight: 500; }
+
+  /* FOOTER */
+  footer { background: var(--dark); color: rgba(255,255,255,0.5); padding: 48px 0 28px; }
+  .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 32px; padding-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  footer .logo { color: var(--white); font-size: 1.5rem; }
+  footer .logo span { color: var(--gold); }
+  .footer-tagline { font-size: 0.82rem; color: rgba(255,255,255,0.35); margin-top: 6px; }
+  .footer-nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+  .footer-nav a { font-size: 0.82rem; color: rgba(255,255,255,0.45); transition: color var(--transition); }
+  .footer-nav a:hover { color: var(--gold); }
+  .footer-social { display: flex; gap: 10px; }
+  .footer-soc { width: 38px; height: 38px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; color: rgba(255,255,255,0.5); transition: var(--transition); }
+  .footer-soc:hover { background: var(--gold); border-color: var(--gold); color: var(--white); }
+  .footer-copy { text-align: center; margin-top: 24px; font-size: 0.78rem; color: rgba(255,255,255,0.25); }
+
+  /* ANIMATIONS */
+  .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-up.visible { opacity: 1; transform: none; }
+  .fade-up:nth-child(2) { transition-delay: 0.1s; }
+  .fade-up:nth-child(3) { transition-delay: 0.2s; }
+  .fade-up:nth-child(4) { transition-delay: 0.3s; }
+
+  /* DESKTOP NAV */
+  @media (min-width: 901px) {
+    .nav-links { display: flex; }
+    .nav-book { display: inline-block; }
+    .burger { display: none; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .nav-inner { position: relative; }
+    .logo { position: relative; z-index: 1; }
+    .about-inner { grid-template-columns: 1fr; }
+    .about-img { max-height: 400px; }
+    .about-badge { width: 90px; height: 90px; right: -10px; bottom: -10px; }
+    .about-badge strong { font-size: 1.5rem; }
+    .contacts-inner { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .gallery-item:nth-child(1) { grid-row: span 1; aspect-ratio: 1; min-height: 180px; }
+    .form-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .perks { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .gallery-item { min-height: 140px; }
+    .gallery-item:nth-child(1) { min-height: 140px; aspect-ratio: 1; grid-row: span 1; }
+    .masters-grid { grid-template-columns: 1fr 1fr; }
+    .review-card { min-width: calc(100vw - 48px); }
+    .hero-btns { flex-direction: column; }
+    .hero-btns .btn { width: 100%; justify-content: center; }
+    .hero-content { padding-top: calc(var(--nav-h) + 20px); }
+    /* Price table horizontal scroll on mobile */
+    .price-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .price-table { min-width: 340px; }
+    .price-table td, .price-table th { padding: 10px 12px; font-size: 0.82rem; }
+    /* Booking form */
+    .booking-form { padding: 24px 16px; }
+    /* Masters 1 col on very small screens */
+    .masters-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+    /* Contacts map height */
+    .contacts-map { height: 260px; }
+    /* Footer */
+    .footer-inner { flex-direction: column; gap: 24px; }
+    .footer-nav { gap: 6px 16px; }
+    /* Section padding */
+    section { padding: clamp(48px,8vw,80px) 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#home" class="logo" style="letter-spacing:0.05em;">Belle<span style="color:var(--gold);">Rose</span></a>
+      <div class="nav-links">
+        <a href="#about">О салоне</a>
+        <a href="#services">Услуги</a>
+        <a href="#price">Стоимость</a>
+        <a href="#gallery">Галерея</a>
+        <a href="#reviews">Отзывы</a>
+        <a href="#contacts">Контакты</a>
+      </div>
+      <a href="#booking" class="nav-book">Записаться</a>
+      <button class="burger" id="burger" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" class="menu-link">О салоне</a>
+  <a href="#services" class="menu-link">Услуги</a>
+  <a href="#price" class="menu-link">Стоимость услуг</a>
+  <a href="#gallery" class="menu-link">Галерея</a>
+  <a href="#reviews" class="menu-link">Отзывы</a>
+  <a href="#masters" class="menu-link">Мастера</a>
+  <a href="#contacts" class="menu-link">Контакты</a>
+  <a href="#booking" class="btn btn-primary menu-link" style="margin-top:16px;">Записаться онлайн</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-photo"></div>
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="hero-content">
+      <p class="eyebrow">Салон красоты · BelleRose</p>
+      <h1>Подчеркнем<br><em style="font-style:italic;font-weight:300;color:rgba(255,255,255,0.8)">вашу естественную</em><br>красоту</h1>
+      <p class="hero-sub">Профессиональный уход, качественные материалы и доступные цены — всё для того, чтобы вы сияли</p>
+      <div class="hero-btns">
+        <a href="#booking" class="btn btn-primary">✦ Записаться онлайн</a>
+        <a href="#services" class="btn btn-outline">Посмотреть услуги</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>прокрутите</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-img-wrap fade-up">
+        <div class="about-img"></div>
+        <div class="about-badge"><strong>8+</strong>лет опыта в<br>красоте</div>
+      </div>
+      <div class="about-text">
+        <p class="eyebrow fade-up">О нас</p>
+        <h2 class="fade-up">Место, где рождается красота</h2>
+        <p class="fade-up" style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--text);margin-bottom:14px;">
+          BelleRose — это пространство, созданное для вас.
+        </p>
+        <p class="fade-up">Мы верим, что настоящая красота — это уверенность в себе. Наши мастера помогут раскрыть вашу природную красоту с помощью профессионального ухода, современных методик и внимательного подхода к каждой гостье.</p>
+        <div class="perks" style="margin-top:28px;">
+          <div class="perk fade-up"><div class="perk-icon">✦</div><div class="perk-label">Опытные мастера с многолетней практикой</div></div>
+          <div class="perk fade-up"><div class="perk-icon">◈</div><div class="perk-label">Качественные профессиональные материалы</div></div>
+          <div class="perk fade-up"><div class="perk-icon">◎</div><div class="perk-label">Полная стерильность и безопасность</div></div>
+          <div class="perk fade-up"><div class="perk-icon">◇</div><div class="perk-label">Доступные цены без скрытых наценок</div></div>
+          <div class="perk fade-up" style="grid-column:1/-1"><div class="perk-icon">♡</div><div class="perk-label">Индивидуальный подход к каждому клиенту</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="eyebrow">Что мы предлагаем</p>
+      <h2>Наши услуги</h2>
+      <p>Всё необходимое для вашей красоты в одном месте</p>
+      <div class="gold-line"></div>
+    </div>
+    <div class="services-tabs fade-up">
+      <button class="tab-btn active" data-cat="all">Все услуги</button>
+      <button class="tab-btn" data-cat="nail">Маникюр / Педикюр</button>
+      <button class="tab-btn" data-cat="hair">Парикмахерские</button>
+      <button class="tab-btn" data-cat="brow">Брови и ресницы</button>
+      <button class="tab-btn" data-cat="cosm">Косметология</button>
+    </div>
+    <div class="services-grid" id="servicesGrid">
+    </div>
+  </div>
+</section>
+
+<!-- PRICE -->
+<section class="price-section" id="price">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="eyebrow">Прозрачные цены</p>
+      <h2>Стоимость услуг</h2>
+      <div class="gold-line"></div>
+    </div>
+    <div class="price-wrap fade-up">
+      <table class="price-table">
+        <thead>
+          <tr><th>Услуга</th><th style="text-align:right">Цена</th></tr>
+        </thead>
+        <tbody>
+          <tr class="price-group"><td colspan="2">Маникюр</td></tr>
+          <tr><td>Классический маникюр</td><td>700 ₽</td></tr>
+          <tr><td>Аппаратный маникюр</td><td>900 ₽</td></tr>
+          <tr><td>Маникюр с покрытием гель-лак</td><td>1 300 ₽</td></tr>
+          <tr class="price-group"><td colspan="2">Педикюр</td></tr>
+          <tr><td>Классический педикюр</td><td>1 100 ₽</td></tr>
+          <tr><td>Педикюр с покрытием гель-лак</td><td>1 600 ₽</td></tr>
+          <tr class="price-group"><td colspan="2">Парикмахерские услуги</td></tr>
+          <tr><td>Женская стрижка</td><td>1 200 ₽</td></tr>
+          <tr><td>Укладка</td><td>900 ₽</td></tr>
+          <tr><td>Окрашивание</td><td>от 2 500 ₽</td></tr>
+          <tr class="price-group"><td colspan="2">Брови и ресницы</td></tr>
+          <tr><td>Коррекция бровей</td><td>500 ₽</td></tr>
+          <tr><td>Окрашивание бровей</td><td>600 ₽</td></tr>
+          <tr><td>Ламинирование ресниц</td><td>1 500 ₽</td></tr>
+          <tr class="price-group"><td colspan="2">Косметология</td></tr>
+          <tr><td>Чистка лица</td><td>1 800 ₽</td></tr>
+          <tr><td>Уходовая процедура</td><td>от 1 500 ₽</td></tr>
+          <tr><td>Пилинг</td><td>от 1 700 ₽</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="text-align:center;margin-top:32px;" class="fade-up">
+      <a href="#booking" class="btn btn-dark">Записаться на услугу</a>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="eyebrow">Наши работы</p>
+      <h2>Галерея</h2>
+      <p>Примеры работ наших мастеров</p>
+      <div class="gold-line"></div>
+    </div>
+    <div class="gallery-grid fade-up" id="galleryGrid"></div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">✕</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<!-- REVIEWS -->
+<section class="testimonials" id="reviews">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="eyebrow">Что говорят клиенты</p>
+      <h2>Отзывы</h2>
+      <div class="gold-line"></div>
+    </div>
+    <div class="reviews-wrap fade-up">
+      <div class="reviews-track" id="reviewsTrack"></div>
+    </div>
+    <div class="slider-nav fade-up">
+      <button id="prevBtn" aria-label="Назад">←</button>
+      <button id="nextBtn" aria-label="Вперед">→</button>
+    </div>
+    <div class="slider-controls" id="sliderDots"></div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking" id="booking">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="eyebrow">Онлайн-запись</p>
+      <h2>Запишитесь онлайн</h2>
+      <p>Оставьте заявку и мы свяжемся с вами для подтверждения</p>
+      <div class="gold-line"></div>
+    </div>
+    <div class="booking-form fade-up">
+      <div class="form-grid">
+        <div class="form-group"><label>Ваше имя</label><input type="text" placeholder="Мария Иванова" id="fName"></div>
+        <div class="form-group"><label>Телефон</label><input type="tel" placeholder="+7 (000) 000-00-00" id="fPhone"></div>
+        <div class="form-group"><label>Услуга</label>
+          <select id="fService">
+            <option value="">Выберите услугу</option>
+            <optgroup label="Маникюр"><option>Классический маникюр — 700 ₽</option><option>Аппаратный маникюр — 900 ₽</option><option>Маникюр с гель-лак — 1 300 ₽</option></optgroup>
+            <optgroup label="Педикюр"><option>Классический педикюр — 1 100 ₽</option><option>Педикюр с покрытием — 1 600 ₽</option></optgroup>
+            <optgroup label="Парикмахерские"><option>Женская стрижка — 1 200 ₽</option><option>Укладка — 900 ₽</option><option>Окрашивание — от 2 500 ₽</option></optgroup>
+            <optgroup label="Брови и ресницы"><option>Коррекция бровей — 500 ₽</option><option>Окрашивание бровей — 600 ₽</option><option>Ламинирование ресниц — 1 500 ₽</option></optgroup>
+            <optgroup label="Косметология"><option>Чистка лица — 1 800 ₽</option><option>Уходовая процедура — от 1 500 ₽</option><option>Пилинг — от 1 700 ₽</option></optgroup>
+          </select>
+        </div>
+        <div class="form-group"><label>Дата</label><input type="date" id="fDate"></div>
+        <div class="form-group"><label>Время</label>
+          <select id="fTime">
+            <option value="">Выберите время</option>
+            <option>09:00</option><option>10:00</option><option>11:00</option><option>12:00</option>
+            <option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option>
+            <option>17:00</option><option>18:00</option><option>19:00</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Мастер</label>
+          <select><option value="">Любой мастер</option><option>Анна — маникюр, педикюр</option><option>Екатерина — парикмахер</option><option>Мария — брови и ресницы</option><option>Ольга — косметология</option></select>
+        </div>
+        <div class="form-group full"><label>Комментарий</label><textarea placeholder="Пожелания или уточнения..."></textarea></div>
+      </div>
+      <div class="form-submit">
+        <button class="btn btn-primary" id="submitBtn" onclick="submitForm()">✦ Записаться</button>
+      </div>
+      <div class="success-msg" id="successMsg">
+        ✦ Спасибо! Мы свяжемся с вами для подтверждения записи. Ждём вас в BelleRose!
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MASTERS -->
+<section class="masters" id="masters">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="eyebrow">Наша команда</p>
+      <h2>Мастера</h2>
+      <p>Профессионалы, которые создадут для вас идеальный образ</p>
+      <div class="gold-line"></div>
+    </div>
+    <div class="masters-grid" id="mastersGrid"></div>
+  </div>
+</section>
+
+<!-- CONTACTS -->
+<section class="contacts" id="contacts">
+  <div class="container">
+    <div class="section-header fade-up">
+      <p class="eyebrow">Как нас найти</p>
+      <h2>Контакты</h2>
+      <div class="gold-line"></div>
+    </div>
+    <div class="contacts-inner">
+      <div class="fade-up">
+        <div class="contact-item">
+          <span class="contact-label">Адрес</span>
+          <span class="contact-value">ул. Невский проспект, 87, Санкт-Петербург</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">Телефон</span>
+          <span class="contact-value"><a href="tel:+78121234567">+7 (812) 123-45-67</a></span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">WhatsApp</span>
+          <span class="contact-value"><a href="https://wa.me/78121234567">+7 (812) 123-45-67</a></span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">Telegram</span>
+          <span class="contact-value"><a href="https://t.me/bellerose_salon">@bellerose_salon</a></span>
+        </div>
+        <div style="margin-top:24px;">
+          <p class="eyebrow" style="margin-bottom:12px;">Время работы</p>
+          <ul class="hours-list">
+            <li><span>Понедельник — Пятница</span><span>09:00 — 20:00</span></li>
+            <li><span>Суббота</span><span>10:00 — 19:00</span></li>
+            <li><span>Воскресенье</span><span>10:00 — 17:00</span></li>
+          </ul>
+        </div>
+        <div class="social-links" style="margin-top:28px;">
+          <a href="#" class="social-btn">📸 Instagram</a>
+          <a href="#" class="social-btn">✈️ Telegram</a>
+          <a href="#" class="social-btn">💬 VKontakte</a>
+        </div>
+      </div>
+      <div class="fade-up">
+        <div class="contacts-map" style="background:var(--blush);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;cursor:pointer;" onclick="window.open('https://maps.google.com/?q=Невский+проспект+87+Санкт-Петербург','_blank')">
+          <div style="width:56px;height:56px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.6rem;box-shadow:0 4px 16px rgba(201,169,110,0.4);">📍</div>
+          <div style="text-align:center;">
+            <p style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--dark);margin-bottom:4px;">Невский пр., 87</p>
+            <p style="font-size:0.85rem;color:var(--muted);">Санкт-Петербург · м. Маяковская</p>
+          </div>
+          <a href="https://maps.google.com/?q=Невский+проспект+87+Санкт-Петербург" target="_blank" class="btn btn-ghost" style="font-size:0.78rem;">Открыть на карте →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="logo" style="letter-spacing:0.05em;">Belle<span style="color:var(--gold);">Rose</span></div>
+        <p class="footer-tagline">Салон красоты · Санкт-Петербург</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="#about">О салоне</a>
+        <a href="#services">Услуги</a>
+        <a href="#price">Стоимость услуг</a>
+        <a href="#gallery">Галерея</a>
+        <a href="#reviews">Отзывы</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+      <div class="footer-social">
+        <a href="#" class="footer-soc" aria-label="Instagram">📷</a>
+        <a href="#" class="footer-soc" aria-label="Telegram">✈</a>
+        <a href="#" class="footer-soc" aria-label="VKontakte">V</a>
+        <a href="#" class="footer-soc" aria-label="WhatsApp">W</a>
+      </div>
+    </div>
+    <p class="footer-copy">© 2026 BelleRose · Салон красоты · Все права защищены</p>
+  </div>
+</footer>
+
+<script>
+// DATA
+const services = [
+  { cat:'nail', title:'Классический маникюр', desc:'Обработка кутикулы, придание формы, полировка. Здоровье и красота ваших рук.', price:'700 ₽', img:'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=400&q=80', label:'Маникюр' },
+  { cat:'nail', title:'Маникюр с гель-лаком', desc:'Долговременное покрытие с богатой палитрой оттенков. Держится до 4 недель.', price:'1 300 ₽', img:'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=400&q=80', label:'Маникюр' },
+  { cat:'nail', title:'Классический педикюр', desc:'Уход за стопами и ногтями. Мягкая кожа и ухоженные ногти круглый год.', price:'1 100 ₽', img:'https://images.unsplash.com/photo-1519014816548-bf5fe059798b?w=400&q=80', label:'Педикюр' },
+  { cat:'nail', title:'Педикюр с покрытием', desc:'Классический педикюр + стойкое покрытие гель-лаком на всё лето.', price:'1 600 ₽', img:'https://images.unsplash.com/photo-1519014816548-bf5fe059798b?w=400&q=80', label:'Педикюр' },
+  { cat:'hair', title:'Женская стрижка', desc:'Стрижка с учётом структуры волос, формы лица и ваших пожеланий.', price:'1 200 ₽', img:'https://images.unsplash.com/photo-1560066984-138daaa0422d?w=400&q=80', label:'Парикмахерские' },
+  { cat:'hair', title:'Укладка волос', desc:'Профессиональная укладка для особых случаев или ежедневного образа.', price:'900 ₽', img:'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&q=80', label:'Парикмахерские' },
+  { cat:'hair', title:'Окрашивание', desc:'Балаяж, омбре, однотонное окрашивание. Используем только премиальные красители.', price:'от 2 500 ₽', img:'https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=400&q=80', label:'Парикмахерские' },
+  { cat:'brow', title:'Коррекция бровей', desc:'Идеальная форма бровей, которая подчеркнёт красоту вашего взгляда.', price:'500 ₽', img:'https://images.unsplash.com/photo-1583001931096-959e9a1a6223?w=400&q=80', label:'Брови и ресницы' },
+  { cat:'brow', title:'Ламинирование ресниц', desc:'Ресницы приобретают изогнутую форму и ухоженный вид на 4–6 недель.', price:'1 500 ₽', img:'https://images.unsplash.com/photo-1583001931096-959e9a1a6223?w=400&q=80', label:'Брови и ресницы' },
+  { cat:'cosm', title:'Чистка лица', desc:'Глубокое очищение пор, выравнивание тона. Кожа дышит и сияет.', price:'1 800 ₽', img:'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=400&q=80', label:'Косметология' },
+  { cat:'cosm', title:'Уходовая процедура', desc:'Интенсивное увлажнение, питание и восстановление кожи лица.', price:'от 1 500 ₽', img:'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=400&q=80', label:'Косметология' },
+  { cat:'cosm', title:'Химический пилинг', desc:'Обновление кожи, сужение пор, борьба с пигментацией и мелкими морщинами.', price:'от 1 700 ₽', img:'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=400&q=80', label:'Косметология' },
+];
+
+const reviews = [
+  { text:'Хожу сюда уже год. Аня делает маникюр просто идеально — аккуратно, быстро и гель держится целый месяц! Атмосфера уютная, всегда можно выпить кофе.', name:'Ирина Сорокина', date:'Апрель 2026', stars:5, avatar:'https://i.pravatar.cc/80?img=47' },
+  { text:'Наконец-то нашла своего мастера по бровям! Мария учла форму моего лица и сделала именно то, о чём я мечтала. Теперь только сюда.', name:'Елена Мартынова', date:'Март 2026', stars:5, avatar:'https://i.pravatar.cc/80?img=48' },
+  { text:'Была на чистке лица — результат превзошёл ожидания! Кожа стала заметно чище и ровнее. Мастер всё объяснила и посоветовала домашний уход.', name:'Дарья Кузнецова', date:'Март 2026', stars:5, avatar:'https://i.pravatar.cc/80?img=49' },
+  { text:'Стригусь здесь уже несколько лет. Катя отлично понимает, что хочу, и всегда предлагает что-то интересное. Записываюсь за несколько недель.', name:'Наталья Волкова', date:'Февраль 2026', stars:5, avatar:'https://i.pravatar.cc/80?img=50' },
+  { text:'Окрашивание волос — просто восхитительно! Цвет ровный, волосы живые и блестящие. Подруги спрашивают, куда хожу.', name:'Светлана Орлова', date:'Февраль 2026', stars:5, avatar:'https://i.pravatar.cc/80?img=51' },
+];
+
+const masters = [
+  { name:'Анна Петрова', spec:'Маникюр и педикюр', exp:'Опыт 7 лет', photo:'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&q=80' },
+  { name:'Екатерина Смирнова', spec:'Парикмахер-стилист', exp:'Опыт 10 лет', photo:'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80' },
+  { name:'Мария Козлова', spec:'Брови и ресницы', exp:'Опыт 5 лет', photo:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80' },
+  { name:'Ольга Новикова', spec:'Косметолог', exp:'Опыт 8 лет', photo:'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&q=80' },
+];
+
+const galleryData = [
+  { url:'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=80', label:'Маникюр' },
+  { url:'https://images.unsplash.com/photo-1560066984-138daaa0422d?w=600&q=80', label:'Стрижка' },
+  { url:'https://images.unsplash.com/photo-1519014816548-bf5fe059798b?w=600&q=80', label:'Педикюр' },
+  { url:'https://images.unsplash.com/photo-1583001931096-959e9a1a6223?w=600&q=80', label:'Брови' },
+  { url:'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&q=80', label:'Уход за лицом' },
+  { url:'https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=600&q=80', label:'Окрашивание' },
+  { url:'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80', label:'Укладка' },
+];
+
+// ── RENDER SERVICES ──────────────────────────────────────────────
+function renderServices(cat) {
+  const grid = document.getElementById('servicesGrid');
+  const filtered = cat === 'all' ? services : services.filter(s => s.cat === cat);
+  grid.innerHTML = filtered.map(s => `
+    <div class="service-card fade-up">
+      <div class="card-img"><img src="${s.img}" alt="${s.title}" loading="lazy" onerror="this.style.display='none'"></div>
+      <div class="card-body">
+        <p class="card-category">${s.label}</p>
+        <h3 class="card-title">${s.title}</h3>
+        <p class="card-desc">${s.desc}</p>
+        <div class="card-footer">
+          <div class="card-price">${s.price}</div>
+          <button class="card-btn" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Записаться</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  observeCards();
+}
+
+// ── TABS (вешаем после DOMContentLoaded чтобы кнопки точно были в DOM) ──
+document.addEventListener('DOMContentLoaded', function() {
+
+  // Вкладки услуг
+  document.querySelectorAll('.tab-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+      this.classList.add('active');
+      renderServices(this.getAttribute('data-cat'));
+    });
+  });
+
+  // ── GALLERY ──────────────────────────────────────────────────────
+  var grid = document.getElementById('galleryGrid');
+  if (grid) {
+    grid.innerHTML = galleryData.map(function(g) {
+      return '<div class="gallery-item" onclick="openLightbox(\'' + g.url + '\')">'
+        + '<img class="gallery-img" src="' + g.url + '" alt="' + g.label + '" loading="lazy">'
+        + '<div class="gallery-overlay"><span class="gallery-label">' + g.label + '</span></div>'
+        + '</div>';
+    }).join('');
+  }
+
+  // ── LIGHTBOX ─────────────────────────────────────────────────────
+  document.getElementById('lightboxClose').addEventListener('click', function() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  });
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) { this.classList.remove('open'); document.body.style.overflow = ''; }
+  });
+
+  // ── REVIEWS SLIDER ───────────────────────────────────────────────
+  var track = document.getElementById('reviewsTrack');
+  var dots  = document.getElementById('sliderDots');
+
+  track.innerHTML = reviews.map(function(r) {
+    return '<div class="review-card">'
+      + '<div class="review-stars">' + '★'.repeat(r.stars) + '</div>'
+      + '<p class="review-text">' + r.text + '</p>'
+      + '<div class="reviewer">'
+      + '<div class="reviewer-avatar"><img src="' + r.avatar + '" alt="' + r.name + '" loading="lazy"></div>'
+      + '<div><p class="reviewer-name">' + r.name + '</p><p class="reviewer-date">' + r.date + '</p></div>'
+      + '</div></div>';
+  }).join('');
+
+  dots.innerHTML = reviews.map(function(_, i) {
+    return '<button class="slider-dot' + (i === 0 ? ' active' : '') + '" data-idx="' + i + '"></button>';
+  }).join('');
+
+  var currentSlide = 0;
+
+  function goSlide(n) {
+    var total = reviews.length;
+    currentSlide = (n + total) % total;
+    // Пересчитываем ширину каждый раз (корректно на мобильных при ресайзе)
+    var card = track.querySelector('.review-card');
+    var gap  = 24;
+    var cardW = card ? (card.getBoundingClientRect().width + gap) : 364;
+    track.style.transform = 'translateX(-' + (currentSlide * cardW) + 'px)';
+    dots.querySelectorAll('.slider-dot').forEach(function(d, i) {
+      d.classList.toggle('active', i === currentSlide);
+    });
+  }
+
+  document.getElementById('prevBtn').addEventListener('click', function() { goSlide(currentSlide - 1); });
+  document.getElementById('nextBtn').addEventListener('click', function() { goSlide(currentSlide + 1); });
+
+  dots.addEventListener('click', function(e) {
+    var btn = e.target.closest('.slider-dot');
+    if (btn) goSlide(parseInt(btn.getAttribute('data-idx'), 10));
+  });
+
+  // Свайп на мобильных
+  var touchStartX = 0;
+  track.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) goSlide(dx < 0 ? currentSlide + 1 : currentSlide - 1);
+  });
+
+  var autoSlide = setInterval(function() { goSlide(currentSlide + 1); }, 5000);
+  track.addEventListener('mouseenter', function() { clearInterval(autoSlide); });
+  track.addEventListener('mouseleave', function() { autoSlide = setInterval(function() { goSlide(currentSlide + 1); }, 5000); });
+
+  // ── MASTERS ──────────────────────────────────────────────────────
+  document.getElementById('mastersGrid').innerHTML = masters.map(function(m) {
+    return '<div class="master-card fade-up">'
+      + '<div class="master-photo"><img src="' + m.photo + '" alt="' + m.name + '" loading="lazy" onerror="this.style.display=\'none\'"></div>'
+      + '<div class="master-info">'
+      + '<p class="master-spec">' + m.spec + '</p>'
+      + '<h3 class="master-name">' + m.name + '</h3>'
+      + '<p class="master-exp">' + m.exp + '</p>'
+      + '</div></div>';
+  }).join('');
+
+  // ── ПЕРВЫЙ РЕНДЕР ─────────────────────────────────────────────────
+  renderServices('all');
+  observeCards();
+
+}); // конец DOMContentLoaded
+
+// ── LIGHTBOX (глобальная функция) ────────────────────────────────
+function openLightbox(url) {
+  document.getElementById('lightboxImg').src = url;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+// ── FORM ─────────────────────────────────────────────────────────
+function submitForm() {
+  var name  = document.getElementById('fName').value.trim();
+  var phone = document.getElementById('fPhone').value.trim();
+  if (!name || !phone) {
+    alert('Пожалуйста, заполните имя и телефон');
+    return;
+  }
+  var msg = document.getElementById('successMsg');
+  msg.style.display = 'block';
+  document.getElementById('submitBtn').style.display = 'none';
+  setTimeout(function() { msg.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
+}
+
+// ── NAV SCROLL ───────────────────────────────────────────────────
+window.addEventListener('scroll', function() {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// ── BURGER ───────────────────────────────────────────────────────
+var burger     = document.getElementById('burger');
+var mobileMenu = document.getElementById('mobileMenu');
+burger.addEventListener('click', function() {
+  burger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+});
+function closeMobileMenu() {
+  burger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('.menu-link').forEach(function(link) {
+  link.addEventListener('click', closeMobileMenu);
+});
+
+// ── INTERSECTION OBSERVER (анимации появления) ───────────────────
+function observeCards() {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up:not(.visible)').forEach(function(el) { observer.observe(el); });
+}
+</script>
+</body>
+</html>
